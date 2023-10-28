@@ -48,20 +48,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navbar: {
-    height: 90,
+    height: 100,
     backgroundColor: '#3498db',
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    paddingTop: 40,
+    color: '#0000ff',
     fontSize: 18,
+    
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 100, 0.5)',
   },
   modalContent: {
     backgroundColor: '#fff',
