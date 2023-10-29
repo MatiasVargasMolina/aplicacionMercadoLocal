@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Modal, TextInput } from 'react-native';
 
 const Navbar = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
+  const [searchText, setSearchText] = useState('');
 
   const handleNavigate = (option) => {
     setSelectedOption(option);
-    // Lógica para manejar la navegación a la opción seleccionada
-    // ...
-    setModalVisible(false); // Cierra el modal después de seleccionar una opción
+    setModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.buttonText}>Menú</Text>
+        <TouchableOpacity style={styles.buttonPrimary} onPress={() => setModalVisible(true)}>
+          <Text style={styles.buttonPrimaryText}>Menú</Text>
         </TouchableOpacity>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar..."
+          placeholderTextColor="#ccc"
+          value={searchText}
+          onChangeText={setSearchText}
+        />
       </View>
       <Modal
         animationType="slide"
@@ -46,18 +52,40 @@ const Navbar = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 0,
   },
   navbar: {
+    paddingTop: 30,
     height: 100,
     backgroundColor: '#3498db',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  buttonText: {
-    paddingTop: 40,
-    color: '#0000ff',
-    fontSize: 18,
-    
+  buttonPrimary: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#007BFF',
+    borderColor: '#007BFF', // Color Primary de Bootstrap
+    borderWidth: 2,
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+},
+buttonPrimaryText: {
+    color: '#000000',
+    fontSize: 16,
+},
+  searchInput: {
+    flex: 1,
+    height: 35,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginLeft: 10,
+    backgroundColor: '#fff',
   },
   modalContainer: {
     flex: 1,
