@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Navbar = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -14,16 +15,24 @@ const Navbar = () => {
   return (
     <View style={styles.container}>
       <View style={styles.navbar}>
-        <TouchableOpacity style={styles.buttonPrimary} onPress={() => setModalVisible(true)}>
-          <Text style={styles.buttonPrimaryText}>Menú</Text>
+        <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.hamburgerButton}>
+          <View style={styles.line}></View>
+          <View style={styles.line}></View>
+          <View style={styles.line}></View>
         </TouchableOpacity>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Buscar..."
-          placeholderTextColor="#ccc"
-          value={searchText}
-          onChangeText={setSearchText}
-        />
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Buscar..."
+            placeholderTextColor="#ccc"
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+          <TouchableOpacity style={styles.searchButton}>
+            <Icon name="search" size={20} color="#ccc" />
+          </TouchableOpacity>
+        </View>
       </View>
       <Modal
         animationType="slide"
@@ -63,29 +72,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  buttonPrimary: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#262fad',
-    borderColor: '#007BFF', // Color Primary de Bootstrap
-    borderWidth: 2,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-},
-buttonPrimaryText: {
-    color: '#edf3ff',
-    fontSize: 16,
-},
-  searchInput: {
+  hamburgerButton: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginLeft: 15,
+    marginRight:10,
+    height: 25, // altura total del botón
+  },
+  line: {
+    height: 3, // grosor de la línea
+    backgroundColor: '#FFFFFF', // color blanco
+    width: 30, // ancho de la línea
+  },
+  logo: {
+    width: 100,
+    height: 30,
+    resizeMode: 'contain',
+    marginHorizontal: 5,
+  },
+  searchContainer: {
+    flexDirection: 'row',
     flex: 1,
-    height: 35,
+    alignItems: 'center',
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
-    padding: 10,
-    marginLeft: 10,
     backgroundColor: '#fff',
+  },
+  searchInput: {
+    flex: 1,
+    height: 35,
+    padding: 10,
+  },
+  searchButton: {
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContainer: {
     flex: 1,
