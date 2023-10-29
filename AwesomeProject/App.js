@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   containerBack: {
     flex: 1,
-    backgroundColor: 'grey'
+    backgroundColor: '#fafcea'
   },
   modalView: {
     margin: 20,

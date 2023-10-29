@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   navbar: {
     paddingTop: 30,
     height: 100,
-    backgroundColor: '#3498db',
+    backgroundColor: '#576efd',
     flexDirection: 'row',
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
   buttonPrimary: {
     paddingVertical: 10,
     paddingHorizontal: 15,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#262fad',
     borderColor: '#007BFF', // Color Primary de Bootstrap
     borderWidth: 2,
-    borderRadius: 4,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
 },
 buttonPrimaryText: {
-    color: '#000000',
+    color: '#edf3ff',
     fontSize: 16,
 },
   searchInput: {
