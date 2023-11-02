@@ -1,50 +1,52 @@
+
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import Navbar from '../components/Navbar';
 import axios from "axios";
-import ProductoCard from '../components/ProductoCard';
+import ProductoCardHorizontal from '../components/ProductoCardHorizontal';
+import ProductoCardVertical from '../components/ProductoCardVertical';
 
 function Home() {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://172.20.10.4:3000/productos");
+      const response = await axios.get("http://192.168.1.13:3000/productos");
       setProducts(response.data);
-      console.log(response.data[0].name);
     } catch (err) {
       console.log(err);
     }
   }
-  const cardStyle = {
-    width: '50%', // Ocupará la mitad del contenedor padre
-    // Otros estilos que desees aplicar al ProductoCard
-  };
+
   useEffect(() => {
     getProducts();
   }, []);
 
-  const renderProduct = ({ item }) => (
-    <ProductoCard producto={item} style={cardStyle} />
+  const renderProductHorizontal = ({ item }) => (
+    <ProductoCardHorizontal producto={item} />
   );
-
+  
+  const renderProductVertical = ({ item }) => (
+    <ProductoCardVertical producto={item} />
+  );
   return (
     <View>
       <Navbar />
       <Text style={styles.ofertasText}>Ofertas del día</Text>
       <View>
-      <FlatList
-               style={styles.containerHome}
-               data={products}
-               renderItem={renderProduct}
-               keyExtractor={(item) => item.id.toString()}
-               horizontal={true}
-               pagingEnabled={true}
-      />
+        <FlatList
+          data={products}
+          renderItem={renderProductHorizontal}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false} // oculta la barra de desplazamiento
+          contentContainerStyle={styles.horizontalList} // estilos para el contenedor de la lista
+        />
       </View>
-      <FlatList              style={styles.containerHome}
+      <FlatList style={styles.containerHome}
         data={products}
-        renderItem={renderProduct}
+        renderItem={renderProductVertical}
         keyExtractor={(item) => item.id.toString()}
         horizontal={false}
         pagingEnabled={true}></FlatList>
@@ -53,19 +55,24 @@ function Home() {
 }
 
 const styles = StyleSheet.create({
-  containerHome: {
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
   },
-  ofertasText:{
-    paddingTop:120,
-    textAlign:"center",
-    fontSize:30
-    
+  ofertasText: {
+    marginTop: 110,
+    marginHorizontal: 10,
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    borderBottomWidth: 2,
+    borderBottomColor: 'blue'
   },
-  containerHorizontal:{
-    flex:1,
-    height:100
-  }
-
+  horizontalList: {
+    paddingHorizontal: 1,  
+    marginVertical: 10,
+  },
 });
 
 export default Home;
