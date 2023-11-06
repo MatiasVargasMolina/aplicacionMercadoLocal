@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { useNavigation } from '@react-navigation/native';
 const Navbar = () => {
+  const navigation = useNavigation()
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const [searchText, setSearchText] = useState('');
-
+  const redirectTo = (view) => {
+    navigation.navigate(`${view}`); // Redirige a la ruta 'ViewForCategory'
+  };
   const handleNavigate = (option) => {
     setSelectedOption(option);
     setModalVisible(false);
@@ -42,13 +45,13 @@ const Navbar = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TouchableOpacity onPress={() => handleNavigate('Home')}>
+            <TouchableOpacity onPress={redirectTo("ViewForCategory")}>
+              <Text style={styles.modalOption}>Vista por categoria</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={redirectTo("Home")}>
               <Text style={styles.modalOption}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleNavigate('Productos')}>
-              <Text style={styles.modalOption}>Productos</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handleNavigate('Categorías')}>
+            <TouchableOpacity onPress={() => redirectTo('Categories')}>
               <Text style={styles.modalOption}>Categorías</Text>
             </TouchableOpacity>
           </View>

@@ -15,16 +15,14 @@ const ProductoCardHorizontal = ({ producto }) => {
 const styles = StyleSheet.create({
   card: {
     width: width / 3 - 20, // Así 3 cartas se ajustarán perfectamente en una fila
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 10,
-    padding: 10,
-    margin: 10,
-    alignItems: 'center', // Centra los elementos horizontalmente
-    justifyContent: 'center' // Centra los elementos verticalmente
+    padding: 0,
+    margin: 10, // Centra los elementos horizontalmente
+    justifyContent: 'center', // Centra los elementos verticalmente
+    backgroundColor:"white"
   },
   imagen: {
-    width: '70%',
+    width: '100%',
     height: 100,
     resizeMode: 'cover',
     borderRadius: 10,
@@ -37,9 +35,10 @@ const styles = StyleSheet.create({
     marginBottom: 5, // Espacio entre el título y el precio
   },
   precio: {
-    fontSize: 20,
-    color: 'green',
-    textAlign: 'center', // Centra el texto horizontalmente
+    fontSize: 30,
+    color: 'red',
+    textAlign:"left"
+ // Centra el texto horizontalmente
   },
 });
 

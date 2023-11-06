@@ -1,22 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
-
+import React, { useEffect, useState  } from 'react'
+import { View,Text } from 'react-native'
+import axios from "axios"
 function ViewForCategory({category}) {
-    const [products,setProducts]=useState([]);
-    const getProduct= async()=>{
-        try{
-            const response = await axios.post("http://172.20.10.4:3000/categoria1")
-            setProducts(response.data)
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
-    
-    useEffect(()=>{
-        getProduct();
-    },[]
-    )
   return (
       
       <View>{products.map((product)=>(

@@ -1,17 +1,21 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
 import Navbar from '../components/Navbar';
 import axios from "axios";
 import ProductoCardHorizontal from '../components/ProductoCardHorizontal';
 import ProductoCardVertical from '../components/ProductoCardVertical';
+import { useNavigation } from '@react-navigation/native';
 
 function Home() {
   const [products, setProducts] = useState([]);
-
+  const navigation = useNavigation()
+  function redirectTo (view, product){
+    navigation.navigate(`${view}`, { product: product }); // Redirige a la ruta 'ViewForCategory'
+  };
   const getProducts = async () => {
     try {
-      const response = await axios.get("http://192.168.1.13:3000/productos");
+      const response = await axios.get("http://172.20.10.4:3000/productos");
       setProducts(response.data);
     } catch (err) {
       console.log(err);
@@ -22,12 +26,18 @@ function Home() {
     getProducts();
   }, []);
 
-  const renderProductHorizontal = ({ item }) => (
-    <ProductoCardHorizontal producto={item} />
-  );
-  
+  const renderProductHorizontal = ({ item }) => {
+    return <ProductoCardHorizontal producto={item} />;
+  };
   const renderProductVertical = ({ item }) => (
-    <ProductoCardVertical producto={item} />
+    <View >
+        
+      <TouchableOpacity onPress={()=>
+      {
+        redirectTo("Product",item )}} >
+        <ProductoCardVertical producto={item} />
+      </TouchableOpacity>
+    </View>
   );
   return (
     <View>
@@ -70,7 +80,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'blue'
   },
   horizontalList: {
-    paddingHorizontal: 1,  
+    paddingHorizontal: 1,
     marginVertical: 10,
   },
 });
