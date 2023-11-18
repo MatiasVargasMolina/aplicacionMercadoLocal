@@ -1,7 +1,16 @@
 import React, { useEffect, useState  } from 'react'
-import { View,Text } from 'react-native'
+import { View,Text, ScrollView,TouchableOpacity } from 'react-native'
 import axios from "axios"
+import Navbar from '../components/Navbar';
+
 export default function Categories() {
+  const renderCategoriaVertical = ({ item }) => {
+    return <><Text>{item.name} </Text></>;
+  };
+    const navigation = useNavigation()
+    function redirectTo (view){
+      navigation.navigate(view); // Redirige a la ruta 'ViewForCategory'
+    };
     const [categories,setCategories]=useState([]);
     const getProduct= async()=>{
         try{
@@ -18,9 +27,14 @@ export default function Categories() {
     },[]
     )
   return (
-    <View>
-        {categories.map((category)=>(<Text>{category.name} </Text>)
-        )}
-    </View>
+    <FlatList
+          data={categories}
+          renderItem={renderCategoriaVertical}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false} // oculta la barra de desplazamiento
+          contentContainerStyle={styles.horizontalList} // estilos para el contenedor de la lista
+        />
   )
 }

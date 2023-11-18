@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet,TouchableOpacity,ScrollView } from 'react-native';
 import Navbar from '../components/Navbar';
 import axios from "axios";
 import ProductoCardHorizontal from '../components/ProductoCardHorizontal';
@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function Home() {
   const [products, setProducts] = useState([]);
+
   const navigation = useNavigation()
   function redirectTo (view, product){
     navigation.navigate(`${view}`, { product: product }); // Redirige a la ruta 'ViewForCategory'
@@ -41,8 +42,6 @@ function Home() {
   );
   return (
     <View>
-      <Navbar />
-      <Text style={styles.ofertasText}>Ofertas del día</Text>
       <View>
         <FlatList
           data={products}
@@ -69,15 +68,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  ofertasText: {
-    marginTop: 110,
-    marginHorizontal: 10,
-    textAlign: "center",
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    borderBottomWidth: 2,
-    borderBottomColor: 'blue'
+  ofertasText: { 
+
   },
   horizontalList: {
     paddingHorizontal: 1,

@@ -21,10 +21,15 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 10,
     padding: 10,
+    backgroundColor:"white",
     flexDirection: 'row',
     margin: 10,
     width: '90%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    shadowColor: 'rgba(0, 0, 0, 0.5)', // Color de la sombra
+    shadowOffset: { width: 2, height: 2 }, // Desplazamiento de la sombra
+    shadowOpacity: 0.8, // Opacidad de la sombra
+    shadowRadius: 4,
   },
   leftContainer: {
     flex: 1,
